@@ -1,1 +1,107 @@
-Coloque aqui todas as respostas das práticas indicadas no README.md
+Coloque aqui todas as respostas das práticas indicadas no README.mdQuestão 1
+    1️⃣ Rede: 172.18.0.0   /  Máscara: 255.255.0.0
+
+    2️⃣ O default gateway é 172.18.0.1.
+
+    3️⃣ Há duas rotas:
+        Uma para a rede local (172.18.0.0/16)
+        Outra como rota padrão (0.0.0.0/0) para saída pela interface eth0.
+
+Questão 2
+    1️⃣ 
+        O IP atribuído à interface de rede principal é 172.18.0.2.
+    
+    2️⃣ 
+        Rede: 172.18.0.0 (baseado no prefixo /16)
+        Máscara: 255.255.0.0
+    
+    3️⃣ 
+        O nome da interface principal é eth0.
+
+Questão 3
+    www.google.com:
+        Name:   www.google.com
+        Address: 172.217.29.196
+        Name:   www.google.com
+        Address: 2800:3f0:4001:844::2004
+    
+    www.whitehouse.gov
+        www.whitehouse.gov      
+        canonical name = wh47.go-vip.net.
+        Name:   wh47.go-vip.net
+        Address: 192.0.66.51
+        Name:   wh47.go-vip.net
+        Address: 2a04:fa87:fffd::c000:4233
+
+    www.rnp.br
+        Server:         127.0.0.11
+        Address:        127.0.0.11#53
+
+        Non-authoritative answer:
+        Name:   www.rnp.br
+        Address: 104.18.26.22
+        Name:   www.rnp.br
+        Address: 104.18.27.22
+        Name:   www.rnp.br
+        Address: 2606:4700::6812:1a16
+        Name:   www.rnp.br
+        Address: 2606:4700::6812:1b16
+
+    www.ufpb.br     
+        canonical name = nginx.bbn.ufpb.br.
+        Name:   nginx.bbn.ufpb.br
+        Address: 150.165.254.52
+
+Questão 4
+    1: 64 bytes from 127.0.0.1: icmp_seq=94 ttl=64 time=0.068 ms
+    
+        1.1: 64 bytes from 172.18.0.2: icmp_seq=0 ttl=64 time=0.075 ms
+
+    2: 
+        2.1 = 64 bytes from 150.165.254.52: icmp_seq=0 ttl=63 time=25.625 ms
+
+        2.2 =  64 bytes from 200.152.173.205: icmp_seq=0 ttl=63 time=169.766 ms
+
+        2.3 = 64 bytes from 170.246.255.242: icmp_seq=1 ttl=63 time=77.201 ms
+
+        2.4 = (Ele não está encontrando na minha maquina) error: root@5727b68fe046:/# ping www.dce.ufpb.br ping: unknown host
+
+    3:
+        3.1 (150.165.254.52): 25.625 ms - Conexão rápida, possivelmente local ou próxima.
+        3.2 (200.152.173.205): 169.766 ms - Conexão mais lenta, indicando maior distância ou mais saltos.
+        3.3 (170.246.255.242): 77.201 ms - Tempo intermediário, mais distante que o primeiro, mas não tanto quanto o segundo.
+       
+        Distância e congestionamento de rede e roteamento influenciam esses tempos.
+
+Questão 5
+    No traceroute, se um roteador não responde, não significa necessariamente um problema. 
+    Isso pode ocorrer devido a configurações de segurança, limitação de recursos do roteador ou bloqueio de respostas por firewalls. 
+    A ausência de resposta não indica falha na rede. 
+
+Questão 6
+    Active Internet connections (only servers)
+    Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    tcp        0      0 127.0.0.11:36383        0.0.0.0:*               LISTEN      -
+    udp        0      0 127.0.0.11:46342        0.0.0.0:*                           -
+
+    Kernel IP routing table
+    Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+    default         172.18.0.1      0.0.0.0         UG        0 0          0 eth0
+    172.18.0.0      0.0.0.0         255.255.0.0     U         0 0          0 eth0
+
+    O comando netstat -tulnp mostra as conexões ativas e as portas de escuta, enquanto o comando netstat -r (ou route) exibe a tabela de roteamento da máquina.
+    Ambos fornecem informações sobre a rede, mas de formas diferentes: netstat -r ou route mostram as rotas de rede, enquanto netstat -tulnp detalha as conexões e portas em uso. 
+    As informações da tabela de roteamento são as mesmas nos dois comandos. 
+
+Questão 7
+    www.ufpb.br 80
+        O servidor está ativo e estabeleceu conexão.
+    
+    www.dce.ufpb.br 
+        Não consegui conexão com www.dce.ufpb.br. 
+        O erro de "Server lookup failure" sugere um problema de DNS, o que pode indicar que o nome do servidor não pôde ser resolvido. Para diferenciar um problema de rede de um problema no serviço, se o DNS funcionar corretamente, mas a conexão falhar, é provável que o serviço FTP esteja inativo. 
+        Se o servidor não responder a um `ping`, o problema pode ser de rede.
+
+Questão 8
+    O mtr é útil para identificar problemas de conectividade e desempenho na rede, como alta latência ou perda de pacotes, ajudando a localizar onde a falha ocorre no caminho entre a origem e o destino. Ele mostra informações como o tempo de resposta (latência), a perda de pacotes e o nome dos roteadores ao longo da rota. 
+    Se algum roteador apresentar alta latência ou perda de pacotes, é possível identificar que o problema está nesse ponto da rede, facilitando o diagnóstico e a solução.
